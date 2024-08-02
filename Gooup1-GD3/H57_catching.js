@@ -1,24 +1,3 @@
-// 1. Các loại caching:
-// In-Memory Caching: Lưu trữ dữ liệu trong bộ nhớ RAM, giúp truy xuất dữ liệu nhanh hơn so với đọc từ ổ đĩa.
-// Ví dụ: Redis, Memcached.
-
-// Disk Caching: Lưu trữ dữ liệu trên đĩa cứng để tránh truy cập nguồn gốc nhiều lần.
-// Ví dụ: SSD Cache, Hibernation Cache.
-
-// Database Caching: Tạo các bản sao dữ liệu tạm thời từ cơ sở dữ liệu để giảm tải truy vấn gốc.
-// Ví dụ: Query Cache trong MySQL.
-
-// Web Caching: Lưu trữ các trang web hoặc tài nguyên web để giảm tải cho máy chủ gốc.
-// Ví dụ: Browser Cache, CDN.
-
-// Object Caching: Lưu trữ các đối tượng đã được xử lý để sử dụng lại trong tương lai.
-// Ví dụ: Application Cache.
-// 2. Khi nào sử dụng caching:
-
-// Tăng tốc độ truy cập dữ liệu: Khi cần truy xuất dữ liệu thường xuyên và nhanh chóng.
-// Giảm tải cho hệ thống: Khi hệ thống gốc không thể xử lý quá nhiều yêu cầu cùng một lúc.
-// Tăng hiệu suất: Khi muốn cải thiện hiệu suất của ứng dụng bằng cách giảm thời gian phản hồi.
-// Lưu trữ tạm thời: Khi cần lưu trữ tạm thời các dữ liệu có thể tái tạo lại dễ dàng.
 const express = require('express');
 const Router = require('./src/routes/userRoutes');
 const bodyParser = require('body-parser');
