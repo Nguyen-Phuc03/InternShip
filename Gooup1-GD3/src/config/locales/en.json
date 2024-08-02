@@ -1,0 +1,8 @@
+{
+  "all_fields_required": "All fields are required.",
+  "email_used": "Email has already been used.",
+  "registration_success": "Registration successful. Check your email to confirm.",
+  "registration_success_email_error": "Registration successful but unable to send confirmation email.",
+  "registration_error": "An error occurred during registration.",
+  "user_created": "User created successfully."
+}

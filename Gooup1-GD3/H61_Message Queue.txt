@@ -1,0 +1,62 @@
+các hệ thống Message Queue:
+
+1. Apache Kafka
+
+2. RabbitMQ
+Cơ chế hoạt động: 
+    -Dựa trên AMQP, tin nhắn được gửi đến exchange và phân phối đến hàng đợi.
+Ưu điểm: 
+    -Hỗ trợ nhiều giao thức, có khả năng mở rộng tốt, dễ cấu hình.
+Nhược điểm: 
+    -Có thể gặp vấn đề về hiệu suất với khối lượng tin nhắn lớn.
+3. Amazon SQS (Simple Queue Service)
+Cơ chế hoạt động: 
+    -Dịch vụ MQ dựa trên đám mây, hỗ trợ FIFO và Standard Queue.
+Ưu điểm: 
+    -Dễ sử dụng, tích hợp tốt với AWS, không cần quản lý cơ sở hạ tầng.
+Nhược điểm: 
+    -Chi phí có thể cao cho khối lượng tin nhắn lớn, phụ thuộc vào dịch vụ AWS.
+4. ZeroMQ
+Cơ chế hoạt động: 
+    -Thư viện messaging phân tán, hoạt động như một message broker nhưng không có cơ sở dữ liệu lưu
+ trữ trung gian.
+Ưu điểm: 
+    -Hiệu suất cao, đơn giản để tích hợp vào các ứng dụng, không cần server trung gian.
+Nhược điểm: 
+    -Thiếu các tính năng nâng cao như lưu trữ và phân phối tin nhắn lâu dài.
+5. Microsoft Message Queuing (MSMQ)
+Cơ chế hoạt động: 
+    -Hệ thống MQ của Microsoft, hỗ trợ các tính năng như lưu trữ tin nhắn và đảm bảo giao hàng.
+Ưu điểm: 
+    -Tích hợp tốt với các sản phẩm của Microsoft, hỗ trợ tính năng đáng tin cậy.
+Nhược điểm: 
+    -Chỉ chạy trên Windows Server, không dễ mở rộng.
+6. Apache RocketMQ
+Cơ chế hoạt động: Hệ thống MQ phân tán, hỗ trợ tính năng phân phối tin nhắn và quản lý lưu trữ.
+Ưu điểm: Khả năng mở rộng tốt, hỗ trợ nhiều mô hình tiêu thụ tin nhắn.
+Nhược điểm: Quản lý và cấu hình có thể phức tạp.
+
+
+tìm hiểu chi tiết về kafka:
+-Kafka là một nền tảng message publish/subscribe phân tán (distributed messaging system) mã nguồn mở được xây dựng nhằm 
+mục đích xử lý dữ liệu streaming theo thời gian thực.
+
+Ưu điểm:
+    -Open-source: Mã nguồn mở
+    -High-throughput: Có khả năng xử lý một lượng lớn thông tin một cách liên tục, gần như không có thời gian chờ
+    -High-frequency: Có thể xử lý cùng lúc nhiều message và nhiều thể loại topic
+    -Scalability: Dễ dàng mở rộng khi có nhu cầu
+    -Tự động lưu trữ message, dễ dàng kiểm tra lại
+    -Cộng đồng người dùng đông đảo, được hỗ trợ nhanh chóng khi cần
+
+Nhược điểm: 
+    -Chưa có bộ công cụ giám sát hoàn chỉnh: Có nhiều tool khác nhau nhưng mỗi tool chỉ đáp ứng một 
+    tính năng quản lý nhất định, chẳng hạn như:
+    -Kafka tool (offset manager)
+    -GUI tool – quản lý topic và consumer
+    -Lense – hỗ trợ query message
+    -Akhq – toolbox quản lý Kafka và view data bên trong Kafka
+    -Không chọn được topic theo wildcard: Người dùng sẽ cần phải sử dụng chính xác tên topic để xử lý message
+    -Giảm hiệu suất khi kích thước message lớn: Kích thước message tăng khiến cho consumer và producer phải 
+    compress và decompress message, từ đó làm bộ nhớ bị chậm đi, ảnh hưởng đến throughput và hiệu suất.
+    -Đôi khi số lượng queues trong Kafka cluster tăng đột biến khiến Kafka xử lý chậm hơn.

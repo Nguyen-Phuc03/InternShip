@@ -1,0 +1,35 @@
+Phân quyền (authorization) là quá trình xác định quyền truy cập của người dùng hoặc các đối tượng khác đối với tài 
+nguyên trong hệ thống. Phân quyền khác với xác thực (authentication), nơi xác thực xác định danh tính người dùng, 
+còn phân quyền xác định quyền hạn của người dùng đối với tài nguyên cụ thể sau khi đã xác thực thành công.
+
+Cách hoạt động của phân :
+    -Xác thực (Authentication): Người dùng đăng nhập vào hệ thống bằng cách cung cấp thông tin đăng nhập (username/password).
+    -Xác định quyền (Authorization): Sau khi người dùng đã được xác thực, hệ thống sẽ kiểm tra quyền của người dùng 
+    để xác định họ có thể truy cập tài nguyên hay thực hiện các hành động nào.
+Các mô hình phân quyền của ứng dụng:
+1. Discretionary Access Control (DAC)
+    -Cơ chế hoạt động: Trong mô hình này, chủ sở hữu tài nguyên (user hoặc group) có quyền quyết định ai có thể truy cập tài nguyên đó và quyền gì họ có (read, write, execute).
+    -Ưu điểm: Linh hoạt và dễ triển khai.
+    -Nhược điểm: Khó quản lý khi hệ thống có nhiều người dùng và tài nguyên.
+2. Mandatory Access Control (MAC)
+    -Cơ chế hoạt động: Quyền truy cập được xác định bởi hệ thống dựa trên các quy tắc bảo mật và phân loại dữ liệu. Người dùng không thể thay đổi quyền truy cập của họ.
+    -Ưu điểm: Bảo mật cao, kiểm soát chặt chẽ.
+    -Nhược điểm: Khó triển khai và quản lý, ít linh hoạt.
+3. Role-Based Access Control (RBAC)
+    -Cơ chế hoạt động: Quyền truy cập được xác định dựa trên vai trò của người dùng. Người dùng được gán vào một hoặc nhiều vai trò và các vai trò này sẽ xác định quyền của họ.
+    -Ưu điểm: Dễ quản lý, phù hợp cho các hệ thống có nhiều người dùng và vai trò.
+    -Nhược điểm: Cần xác định và quản lý vai trò một cách chặt chẽ.
+4. Attribute-Based Access Control (ABAC)
+    -Cơ chế hoạt động: Quyền truy cập được xác định dựa trên các thuộc tính của người dùng, tài nguyên, và môi trường. Các thuộc tính có thể là vai trò, thời gian, địa điểm, loại thiết bị, v.v.
+    -Ưu điểm: Linh hoạt và mạnh mẽ.
+    -Nhược điểm: Phức tạp và khó triển khai.
+Triển khai và luồng authorization:
+    RBAC (Role-Based Access Control)
+        -Xác định vai trò: Xác định các vai trò cần có trong hệ thống (Admin, User, Manager, etc.).
+        -Gán quyền cho vai trò: Gán các quyền cụ thể cho từng vai trò (read, write, delete, etc.).
+        -Gán vai trò cho người dùng: Gán người dùng vào các vai trò phù hợp.
+        -Kiểm tra quyền: Khi người dùng thực hiện yêu cầu, hệ thống kiểm tra vai trò của người dùng và xác định xem họ có quyền thực hiện hành động đó hay không.
+Triển khai RBAC với JWT:
+    -Tạo JWT token: Khi người dùng đăng nhập, hệ thống tạo một JWT token chứa thông tin về người dùng và vai trò của họ.
+    -Xác thực JWT: Khi người dùng thực hiện yêu cầu, hệ thống xác thực JWT token để đảm bảo tính hợp lệ.
+    -Kiểm tra vai trò: Hệ thống kiểm tra vai trò của người dùng được lưu trong JWT token và xác định quyền truy cập.

@@ -1,0 +1,36 @@
+--Export và Import:
+
+Export: Để sử dụng một thành phần (biến, hàm, lớp, v.v.) từ module khác, trước tiên thành phần đó 
+phải được export. Có hai loại export:
+    Named Export: Cho phép xuất nhiều thành phần từ một module
+    Default Export: Mỗi module có thể có một export mặc định
+
+Import: Các thành phần được export từ module khác có thể được import vào module hiện tại để sử dụng.
+
+
+--Cách Module Hoạt Động:
+
+    Mỗi module có phạm vi riêng, điều này có nghĩa là biến và hàm được định nghĩa trong một module không bị rò rỉ ra 
+ngoài phạm vi của nó.
+    Các module được tải và chạy khi chúng được import lần đầu tiên.
+TypeScript biên dịch các modules thành các module JavaScript, tương thích với các hệ thống module phổ biến như CommonJS 
+(dùng trong Node.js) và ECMAScript Modules (ESM).
+
+
+
+--Tối Ưu Modules
+Sử Dụng Modules Một Cách Hiệu Quả:
+    -Tránh Import Thừa: Chỉ import các thành phần cần thiết để giảm kích thước gói và tăng hiệu suất.
+    -Tổ Chức Mã Nguồn: Sử dụng các thư mục và module hợp lý để giữ mã nguồn được tổ chức tốt.
+    -Sử Dụng Đúng Export: Lựa chọn giữa named và default exports tùy thuộc vào yêu cầu của dự án. Named exports 
+    -thường tốt hơn cho việc xuất nhiều thành phần, trong khi default export tốt hơn cho việc xuất một thành phần chính.
+-Tối Ưu Hiệu Suất:
+    Lazy Loading: Sử dụng dynamic imports để tải các module khi cần thiết, giúp cải thiện thời gian tải ban đầu.
+
+
+--Cách Sử Dụng Hợp Lý
+-Chia Module Theo Tính Năng: Đặt các hàm, lớp và biến có liên quan vào cùng một module để giữ cho mã 
+    nguồn dễ hiểu và dễ bảo trì.
+-Sử Dụng Tên Module Rõ Ràng: Đặt tên module rõ ràng để phản ánh nội dung của nó, giúp dễ dàng hiểu và sử dụng module đó.
+-Tuân Thủ Nguyên Tắc Single Responsibility Principle (SRP): Mỗi module nên có một trách nhiệm rõ ràng 
+    và không nên xử lý nhiều nhiệm vụ không liên quan.

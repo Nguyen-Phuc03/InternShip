@@ -1,0 +1,8 @@
+{
+  "all_fields_required": "Tất cả các trường đều bắt buộc.",
+  "email_used": "Email đã được sử dụng.",
+  "registration_success": "Đăng ký thành công. Kiểm tra email của bạn để xác nhận.",
+  "registration_success_email_error": "Đăng ký thành công nhưng không thể gửi email xác nhận.",
+  "registration_error": "Đã xảy ra lỗi trong quá trình đăng ký.",
+  "user_created": "Người dùng đã được tạo thành công."
+}
