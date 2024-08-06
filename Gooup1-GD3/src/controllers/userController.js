@@ -2,20 +2,15 @@ const userService = require('../services/userService');
 
 exports.register = async (req, res) => {
   const { name, phone, address, email, password, role } = req.body;
-
-  // Kiểm tra xem các trường có đầy đủ không
   if (!name || !phone || !address || !email || !password || !role) {
     return res.status(400).json({ message: 'All fields are required' });
   }
 
   try {
-    // Kiểm tra xem người dùng đã tồn tại chưa
     const existingUser = await userService.getUserByName(email);
     if (existingUser) {
       return res.status(409).json({ message: 'Email has already been used' });
     }
-
-    // Tạo người dùng
     await userService.createUser({
       name,
       phone,
@@ -24,8 +19,6 @@ exports.register = async (req, res) => {
       password,
       role,
     });
-
-    // Trả về phản hồi thành công
     return res.status(201).json({ message: 'Registration successful' });
   } catch (err) {
     return res

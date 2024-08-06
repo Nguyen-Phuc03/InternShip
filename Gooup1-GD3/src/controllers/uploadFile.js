@@ -4,7 +4,7 @@ const path = require('path');
 // Cấu hình storage cho multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Thư mục lưu trữ file upload
+    cb(null, 'uploads/');
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
@@ -15,7 +15,6 @@ const storage = multer.diskStorage({
   },
 });
 
-// Khởi tạo upload middleware với cấu hình storage
 const upload = multer({ storage: storage });
 
 module.exports = upload;
