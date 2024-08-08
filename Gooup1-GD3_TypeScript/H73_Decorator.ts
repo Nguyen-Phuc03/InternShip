@@ -1,4 +1,5 @@
 //class decorator
+
 // function classDecorator(constructor: Function) {
 //   console.log("Class Decorator Called");
 //   constructor.prototype.classDecorated = true;
@@ -15,6 +16,7 @@
 // console.log(instance.classDecorated); // true
 
 //method decorator
+
 // function methodDecorator(
 //   target: Object,
 //   propertyKey: string,
@@ -55,6 +57,7 @@
 // const instance = new ExampleClass();
 
 //Parameter Decorator
+
 // function parameterDecorator(
 //   target: Object,
 //   propertyKey: string,

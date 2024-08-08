@@ -1,6 +1,6 @@
 interface User {
   readonly id: number;
-  name: String;
+  //name: String;
   age: number;
   address?: String; // Optional property
   readonly email: String; // Readonly property
