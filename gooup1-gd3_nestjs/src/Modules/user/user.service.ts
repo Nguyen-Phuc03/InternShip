@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class UserService {
   getTrueLove(): string {
-    return 'I LOVE YOU ^^!';
+    return 'okee';
   }
   private users = [];
   create(user: any) {
