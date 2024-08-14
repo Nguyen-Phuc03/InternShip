@@ -6,7 +6,23 @@ export interface User {
 }
 @Injectable()
 export class UserService {
-  private users: User[] = [];
+  private users: User[] = [
+    {
+      id: 1,
+      name: 'Nguyễn Văn A',
+      email: 'nguyenvana@example.com',
+    },
+    {
+      id: 2,
+      name: 'Trần Thị B',
+      email: 'tranthib@example.com',
+    },
+    {
+      id: 3,
+      name: 'Lê Văn C',
+      email: 'levanc@example.com',
+    },
+  ];
 
   findAll(): User[] {
     return this.users;
