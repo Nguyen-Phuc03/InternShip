@@ -15,6 +15,7 @@ export class UserController {
 
   @Get()
   findAll(): User[] {
+    //khi findAll được gọi sẽ sử dụng userService để trả lại
     return this.userService.findAll();
   }
 

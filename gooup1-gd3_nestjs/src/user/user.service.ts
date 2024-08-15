@@ -4,6 +4,7 @@ export interface User {
   name: string;
   email: string;
 }
+//UserService là provider
 @Injectable()
 export class UserService {
   private users: User[] = [
