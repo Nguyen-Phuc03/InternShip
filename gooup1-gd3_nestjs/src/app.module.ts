@@ -1,11 +1,12 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
 import { MiddlewareModule } from './middleware/middleware.module';
 import { LoggerMiddleware } from './logger/logger.middleware';
 import { DatabaseModule } from './database/database.module';
+//import { I18nJsonLoader, I18nModule } from 'nestjs-i18n';
+//import { I18nService } from './i18n/i18n.service';
+//import * as path from 'path';
 @Module({
   imports: [
     UserModule,
@@ -13,11 +14,10 @@ import { DatabaseModule } from './database/database.module';
     DatabaseModule,
     DatabaseModule.forRoot({
       type: 'postgres',
-      url: 'postgres://localhost/db',
+      url: 'postgres://localhost/Hotel_booking_system',
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService, UserService],
+  providers: [UserService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
