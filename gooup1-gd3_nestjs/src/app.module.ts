@@ -1,7 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
-import { MiddlewareModule } from './middleware/middleware.module';
 import { LoggerMiddleware } from './logger/logger.middleware';
 import { DatabaseModule } from './database/database.module';
 //import { I18nJsonLoader, I18nModule } from 'nestjs-i18n';
@@ -10,7 +9,6 @@ import { DatabaseModule } from './database/database.module';
 @Module({
   imports: [
     UserModule,
-    MiddlewareModule,
     DatabaseModule,
     DatabaseModule.forRoot({
       type: 'postgres',
