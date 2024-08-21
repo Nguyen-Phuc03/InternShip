@@ -5,36 +5,37 @@ import {
   Get,
   Param,
   Post,
-  Put,
+  Patch,
+  // Req,
 } from '@nestjs/common';
-import { UserService, User } from './user.service';
+import { UserService } from './user.service';
 
-@Controller('user')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @Post()
+  create(@Body() createUser) {
+    return this.userService.create(createUser);
+  }
+
   @Get()
-  findAll(): User[] {
-    //khi findAll được gọi sẽ sử dụng userService để trả lại
+  findAll() {
     return this.userService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): User {
+  findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);
   }
 
-  @Post()
-  create(@Body() user: User) {
-    this.userService.create(user);
-  }
-  @Put(':id')
-  update(@Param('id') id: string, @Body() user: Partial<User>) {
-    this.userService.update(+id, user);
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateUser) {
+    return this.userService.update(+id, updateUser);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    this.userService.remove(+id);
+    return this.userService.remove(+id);
   }
 }

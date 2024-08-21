@@ -1,50 +1,38 @@
 import { Injectable } from '@nestjs/common';
-export interface User {
-  id: number;
-  name: string;
-  email: string;
-}
 //UserService là provider
+
 @Injectable()
 export class UserService {
-  private users: User[] = [
-    {
-      id: 1,
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@example.com',
-    },
-    {
-      id: 2,
-      name: 'Trần Thị B',
-      email: 'tranthib@example.com',
-    },
-    {
-      id: 3,
-      name: 'Lê Văn C',
-      email: 'levanc@example.com',
-    },
-  ];
+  private users = [];
 
-  findAll(): User[] {
+  create(user) {
+    this.users.push(user);
+    return user;
+  }
+
+  findAll() {
     return this.users;
   }
 
-  findOne(id: number): User {
+  findOne(id: number) {
     return this.users.find((user) => user.id === id);
   }
 
-  create(user: User) {
-    this.users.push(user);
-  }
-
-  update(id: number, updateUser: Partial<User>) {
-    const user = this.findOne(id);
-    if (user) {
-      Object.assign(user, updateUser);
+  update(id: number, updateUser) {
+    const userIndex = this.users.findIndex((user) => user.id === id);
+    if (userIndex > -1) {
+      this.users[userIndex] = updateUser;
+      return updateUser;
     }
+    return null;
   }
 
   remove(id: number) {
-    this.users = this.users.filter((user) => user.id !== id);
+    const userIndex = this.users.findIndex((user) => user.id === id);
+    if (userIndex > -1) {
+      const user = this.users.splice(userIndex, 1);
+      return user;
+    }
+    return null;
   }
 }

@@ -1,22 +1,35 @@
 import { Module, DynamicModule } from '@nestjs/common';
+import { DataSource } from 'typeorm';
 
 @Module({})
 export class DatabaseModule {
-  static forRoot(options: { type: string; url: string }): DynamicModule {
+  static forRoot(entities = [], options?): DynamicModule {
+    const providers = [
+      {
+        provide: 'DATABASE_CONNECTION',
+        useFactory: async () => {
+          const dataSource = new DataSource({
+            type: 'mysql',
+            host: 'localhost',
+            port: 3306,
+            username: 'root',
+            password: '27052003',
+            database: 'hotel_booking_system',
+            entities: entities,
+            synchronize: true,
+            ...options,
+          });
+          await dataSource.initialize();
+
+          return dataSource;
+        },
+      },
+    ];
+
     return {
       module: DatabaseModule,
-      providers: [
-        {
-          provide: 'DATABASE_CONNECTION',
-          useValue: createDatabaseConnection(options),
-        },
-      ],
-      exports: ['DATABASE_CONNECTION'],
+      providers: providers,
+      exports: providers,
     };
   }
-}
-
-function createDatabaseConnection(options: { type: string; url: string }) {
-  console.log(`Connecting to ${options.type} database at ${options.url}`);
-  return {};
 }

@@ -3,15 +3,9 @@ import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
 import { LoggerMiddleware } from './logger/logger.middleware';
 import { DatabaseModule } from './database/database.module';
+import { User } from './user/user.entity';
 @Module({
-  imports: [
-    UserModule,
-    DatabaseModule,
-    DatabaseModule.forRoot({
-      type: 'postgres',
-      url: 'postgres://localhost:5432/Hotel_booking_system',
-    }),
-  ],
+  imports: [UserModule, DatabaseModule.forRoot([User])],
   providers: [UserService],
 })
 export class AppModule implements NestModule {
