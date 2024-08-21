@@ -32,7 +32,7 @@ let color: Color = Color.Green;
 // 7. Unknown
 // Kiểu unknown là một loại dữ liệu chung chung hơn so với any, giúp kiểm tra kiểu an toàn hơn trước khi gán giá trị.
 let value: unknown;
-value = "hello"; // OK
-value = 123; // OK
+value = "hello";
+value = 123;
 
 let str: string;
