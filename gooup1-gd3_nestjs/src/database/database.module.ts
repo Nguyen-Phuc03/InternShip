@@ -14,7 +14,7 @@ export class DatabaseModule {
             port: 3306,
             username: 'root',
             password: '27052003',
-            database: 'hotel_booking_system',
+            database: 'student',
             entities: entities,
             synchronize: true,
             ...options,

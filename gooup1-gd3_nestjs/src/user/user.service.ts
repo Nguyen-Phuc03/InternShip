@@ -1,13 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { I18nContext } from 'nestjs-i18n';
+import { I18nService } from 'nestjs-i18n/dist/services/i18n.service';
 //UserService là provider
-
 @Injectable()
 export class UserService {
   private users = [];
 
+  constructor(private readonly i18n: I18nService) {}
+
   create(user) {
     this.users.push(user);
-    return user;
+
+    return this.i18n.t('lang.USER_CREATED', {
+      lang: I18nContext.current().lang,
+    });
   }
 
   findAll() {
@@ -15,7 +21,15 @@ export class UserService {
   }
 
   findOne(id: number) {
-    return this.users.find((user) => user.id === id);
+    const user = this.users.find((user) => user.id === id);
+    if (!user) {
+      throw new NotFoundException(
+        this.i18n.t('lang.USER_NOT_FOUND', {
+          lang: I18nContext.current().lang,
+        }),
+      );
+    }
+    return user;
   }
 
   update(id: number, updateUser) {
