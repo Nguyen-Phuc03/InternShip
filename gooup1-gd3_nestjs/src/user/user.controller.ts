@@ -1,21 +1,23 @@
 import {
-  Body,
   Controller,
-  Delete,
   Get,
   Param,
-  Post,
+  Query,
   Patch,
+  Delete,
+  Body,
+  Post,
 } from '@nestjs/common';
 import { UserService } from './user.service';
+import { UserDto } from './dto/user.dto';
 
-@Controller('users')
+@Controller()
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  create(@Body() createUser) {
-    return this.userService.create(createUser);
+  create(@Body() userDto: UserDto) {
+    return this.userService.create(userDto);
   }
 
   @Get()
@@ -24,17 +26,23 @@ export class UserController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     return this.userService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUser) {
-    return this.userService.update(+id, updateUser);
+  update(@Param('id') id: number, @Body() updateUserDto: UserDto) {
+    return this.userService.update(id, updateUserDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.userService.remove(id);
+  }
+
+  @Get('user/list')
+  getUsersByName(@Query('name') name: string) {
+    const users = this.userService.findByName(name);
+    return users;
   }
 }

@@ -24,7 +24,7 @@ import { join } from 'path';
     I18nModule.forRoot({
       fallbackLanguage: 'en',
       loaderOptions: {
-        path: join(__dirname, './i18n/'),
+        path: join(__dirname, '/i18n/'),
         watch: true,
       },
       resolvers: [
@@ -38,9 +38,6 @@ import { join } from 'path';
   providers: [UserService],
 })
 export class AppModule implements NestModule {
-  constructor() {
-    console.log(__dirname); // In ra đường dẫn hiện tại
-  }
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoggerMiddleware).forRoutes('*');
   }
