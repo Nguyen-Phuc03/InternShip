@@ -10,13 +10,15 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
+import { User } from './user.decorator';
 
-@Controller()
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  create(@Body() userDto: UserDto) {
+  create(@Body() userDto: UserDto, @User() user: UserDto) {
+    console.log('User data:', user);
     return this.userService.create(userDto);
   }
 
@@ -40,7 +42,7 @@ export class UserController {
     return this.userService.remove(id);
   }
 
-  @Get('user/list')
+  @Get('find/list')
   getUsersByName(@Query('name') name: string) {
     const users = this.userService.findByName(name);
     return users;
