@@ -9,7 +9,7 @@
     "build": "tsc && cp -r i18n dist/i18n",
     "postbuild": "cp -R src/i18n dist/i18n",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
+    "start": "nodemon --exec ts-node src/main.ts",
     "start:dev": "nodemon --exec ts-node src/main.ts",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",

@@ -2,16 +2,14 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { I18nService } from 'nestjs-i18n/dist/services/i18n.service';
 import { UserDto } from './dto/user.dto';
 import { I18nContext } from 'nestjs-i18n';
-
 @Injectable()
 export class UserService {
   constructor(private readonly i18n: I18nService) {}
-
   private readonly users: UserDto[] = [
     {
       id_users: 1,
       name: 'Phuc',
-      phone: 12348,
+      phone: 123487755544,
       address: 'quanlienchieu',
       email: 'nphuc305072@gmail.com',
     },
@@ -32,6 +30,7 @@ export class UserService {
   }
 
   findAll() {
+    //console.log(this.appkey);
     return this.users;
   }
 

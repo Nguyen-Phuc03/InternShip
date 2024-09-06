@@ -7,17 +7,20 @@ import {
   Delete,
   Body,
   Post,
+  Inject,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
-import { User } from './user.decorator';
+import { CUser } from './user.decorator';
 
 @Controller('users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
-
+  //constructor(private readonly userService: UserService) {}
+  constructor(
+    @Inject('USER_SERVICE') private readonly userService: UserService,
+  ) {}
   @Post()
-  create(@Body() userDto: UserDto, @User() user: UserDto) {
+  create(@Body() userDto: UserDto, @CUser() user: UserDto) {
     console.log('User data:', user);
     return this.userService.create(userDto);
   }
@@ -26,7 +29,6 @@ export class UserController {
   findAll() {
     return this.userService.findAll();
   }
-
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.userService.findOne(+id);
