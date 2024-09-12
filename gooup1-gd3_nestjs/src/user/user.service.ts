@@ -1,41 +1,39 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { I18nService } from 'nestjs-i18n/dist/services/i18n.service';
 import { UserDto } from './dto/user.dto';
 import { I18nContext } from 'nestjs-i18n';
+import { User1Service } from './user1.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './user.entity';
+import { MediatorService } from './mediator.service';
+
 @Injectable()
 export class UserService {
-  constructor(private readonly i18n: I18nService) {}
-  private readonly users: UserDto[] = [
-    {
-      id_users: 1,
-      name: 'Phuc',
-      phone: 123487755544,
-      address: 'quanlienchieu',
-      email: 'nphuc305072@gmail.com',
-    },
-    {
-      id_users: 2,
-      name: 'Long',
-      phone: 231213213124,
-      address: 'quanlienchieu',
-      email: 'long@example.com',
-    },
-  ];
+  constructor(
+    private readonly i18n: I18nService,
 
-  create(user: UserDto) {
-    this.users.push(user);
-    return this.i18n.t('lang.USER_CREATED', {
-      lang: I18nContext.current().lang,
-    });
+    // @Inject(forwardRef(() => User1Service))
+    // private readonly user1service: User1Service,
+    private readonly mediatorService: MediatorService,
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) {}
+  async create(userDto: UserDto): Promise<User> {
+    const user = this.userRepository.create(userDto);
+    this.mediatorService.notify('UserService', 'userCreated');
+    return await this.userRepository.save(user);
+  }
+  async findAll(): Promise<User[]> {
+    return await this.userRepository.find();
   }
 
-  findAll() {
-    //console.log(this.appkey);
-    return this.users;
-  }
-
-  findOne(id: number) {
-    const user = this.users.find((user) => user.id_users === id);
+  async findOne(id: number): Promise<User> {
+    const user = await this.userRepository.findOneBy({ id_users: id });
     if (!user) {
       throw new NotFoundException(
         this.i18n.t('lang.USER_NOT_FOUND', {
@@ -45,39 +43,27 @@ export class UserService {
     }
     return user;
   }
-  findByName(name: string) {
-    const users = this.users.filter(
-      (user) => user.name.toLowerCase() === name.toLowerCase(),
-    );
+
+  async findByName(name: string): Promise<User[]> {
+    const users = await this.userRepository.find({ where: { name } });
     if (users.length === 0) {
-      throw new NotFoundException(this.i18n.t('lang.USER_NOT_FOUND'));
+      throw new NotFoundException(
+        this.i18n.t('lang.USER_NOT_FOUND', {
+          lang: I18nContext.current().lang,
+        }),
+      );
     }
     return users;
   }
 
-  update(id: number, updateUser: UserDto) {
-    const userIndex = this.users.findIndex((user) => user.id_users === id);
-    if (userIndex > -1) {
-      this.users[userIndex] = { ...this.users[userIndex], ...updateUser };
-      return this.users[userIndex];
-    }
-    throw new NotFoundException(
-      this.i18n.t('lang.USER_NOT_FOUND', {
-        lang: I18nContext.current().lang,
-      }),
-    );
+  async update(id: number, updateUserDto: UserDto): Promise<User> {
+    const user = await this.findOne(id);
+    const updatedUser = Object.assign(user, updateUserDto);
+    return await this.userRepository.save(updatedUser);
   }
 
-  remove(id: number) {
-    const userIndex = this.users.findIndex((user) => user.id_users === id);
-    if (userIndex > -1) {
-      const [user] = this.users.splice(userIndex, 1);
-      return user;
-    }
-    throw new NotFoundException(
-      this.i18n.t('lang.USER_NOT_FOUND', {
-        lang: I18nContext.current().lang,
-      }),
-    );
+  async remove(id: number): Promise<User> {
+    const user = await this.findOne(id);
+    return await this.userRepository.remove(user);
   }
 }

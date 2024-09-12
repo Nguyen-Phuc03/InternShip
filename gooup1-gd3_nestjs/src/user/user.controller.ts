@@ -24,7 +24,6 @@ export class UserController {
     console.log('User data:', user);
     return this.userService.create(userDto);
   }
-
   @Get()
   findAll() {
     return this.userService.findAll();
