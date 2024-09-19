@@ -3,7 +3,7 @@ import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { User1Service } from './user1.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './user.entity';
+import { User } from '../user/entities/user.entity';
 import { MediatorService } from './mediator.service';
 
 const customProvider = {

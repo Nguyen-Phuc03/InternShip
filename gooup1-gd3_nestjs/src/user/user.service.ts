@@ -10,7 +10,7 @@ import { I18nContext } from 'nestjs-i18n';
 import { User1Service } from './user1.service';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './user.entity';
+import { User } from './entities/user.entity';
 import { MediatorService } from './mediator.service';
 
 @Injectable()

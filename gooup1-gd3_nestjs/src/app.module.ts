@@ -15,8 +15,9 @@ import { User1Service } from './user/user1.service';
 import { MediatorService } from '../src/user/mediator.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { User } from './user/user.entity';
+import { User } from './user/entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
+import { User_mongodb } from './user/entities/UserMongodb.entity';
 // import { MediatorModule } from './mediator/mediator.module';
 @Module({
   imports: [
@@ -29,10 +30,19 @@ import { ConfigModule } from '@nestjs/config';
       port: +process.env.DB_PORT,
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
+      database: 'students',
 
       entities: [User],
-      synchronize: true,
+      synchronize: false,
+    }),
+    TypeOrmModule.forRoot({
+      type: 'mongodb',
+      url: process.env.MONGODB_URL,
+      database: 'Students',
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      entities: [User_mongodb],
+      synchronize: false,
     }),
     I18nModule.forRoot({
       fallbackLanguage: 'en',
