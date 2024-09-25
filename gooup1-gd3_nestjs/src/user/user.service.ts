@@ -12,6 +12,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { MediatorService } from './mediator.service';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
 
 @Injectable()
 export class UserService {
@@ -22,6 +23,7 @@ export class UserService {
     // private readonly user1service: User1Service,
     private readonly mediatorService: MediatorService,
     @InjectRepository(User) private readonly userRepository: Repository<User>,
+    //@Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
   async create(userDto: UserDto): Promise<User> {
     const user = this.userRepository.create(userDto);

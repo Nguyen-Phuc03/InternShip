@@ -8,12 +8,15 @@ import {
   Body,
   Post,
   Inject,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './dto/user.dto';
 import { CUser } from './user.decorator';
+import { CacheInterceptor } from '@nestjs/cache-manager';
 
 @Controller('users')
+@UseInterceptors(CacheInterceptor)
 export class UserController {
   //constructor(private readonly userService: UserService) {}
   constructor(
