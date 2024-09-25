@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadService } from './upload.service';
+
 import { memoryStorage } from 'multer';
 
 @Controller('upload')
@@ -25,9 +26,11 @@ export class UploadController {
     }
 
     const savedFile = await this.uploadService.handleFile(file);
+    const savedatproject = await this.uploadService.saveFile(file);
     return {
-      message: 'File uploaded and saved to database successfully',
+      message: 'File uploaded and s aved to database successfully',
       file: savedFile.id,
+      path: savedatproject,
     };
   }
 }
