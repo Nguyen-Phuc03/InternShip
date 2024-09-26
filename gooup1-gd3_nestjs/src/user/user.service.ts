@@ -13,6 +13,7 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { MediatorService } from './mediator.service';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class UserService {
@@ -23,7 +24,7 @@ export class UserService {
     // private readonly user1service: User1Service,
     private readonly mediatorService: MediatorService,
     @InjectRepository(User) private readonly userRepository: Repository<User>,
-    //@Inject(CACHE_MANAGER) private cacheManager: Cache,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
   async create(userDto: UserDto): Promise<User> {
     const user = this.userRepository.create(userDto);
@@ -31,7 +32,22 @@ export class UserService {
     return await this.userRepository.save(user);
   }
   async findAll(): Promise<User[]> {
-    return await this.userRepository.find();
+    const cacheKey = 'users';
+    const cachedData = await this.cacheManager.get<User[]>(cacheKey);
+
+    if (cachedData) {
+      console.log('got data from cache');
+      return cachedData;
+    } else {
+      const users = await this.userRepository.find();
+      try {
+        await this.cacheManager.set(cacheKey, users, 60 * 10000);
+        console.log('Data saved to cache');
+      } catch (error) {
+        console.error('Error saving data to cache:', error);
+      }
+      return users;
+    }
   }
 
   async findOne(id: number): Promise<User> {

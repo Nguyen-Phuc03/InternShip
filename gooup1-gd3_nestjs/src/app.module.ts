@@ -25,12 +25,12 @@ import { FileEntity } from './Upload/entities/upload.entity';
 @Module({
   imports: [
     CacheModule.register({
-      //max: 100,
       ttl: 30 * 1000,
       isGlobal: true,
+      //store: redisStore,
     }),
     UserModule,
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({}),
     //DatabaseModule.forRoot([User]),
     TypeOrmModule.forRoot({
       type: 'mysql',
