@@ -1,5 +1,5 @@
 import {
-  forwardRef,
+  // forwardRef,
   Inject,
   Injectable,
   NotFoundException,
@@ -7,14 +7,13 @@ import {
 import { I18nService } from 'nestjs-i18n/dist/services/i18n.service';
 import { UserDto } from './dto/user.dto';
 import { I18nContext } from 'nestjs-i18n';
-import { User1Service } from './user1.service';
+// import { User1Service } from './user1.service';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { MediatorService } from './mediator.service';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
-
 @Injectable()
 export class UserService {
   constructor(

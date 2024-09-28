@@ -9,9 +9,6 @@ export class User_mongodb {
   name: string;
 
   @Prop()
-  age: number;
-
-  @Prop()
   email: string;
 }
 

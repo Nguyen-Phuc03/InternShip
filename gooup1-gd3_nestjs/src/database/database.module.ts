@@ -1,37 +1,20 @@
-// import { Module, DynamicModule } from '@nestjs/common';
-// import { DataSource } from 'typeorm';
-
-// @Module({})
-// export class DatabaseModule {
-//   static forRoot(entities = [], options?): DynamicModule {
-//     const providers = [
-//       {
-//         provide: 'DATABASE_CONNECTION',
-//         useFactory: async () => {
-//           const dataSource = new DataSource({
-//             type: 'mysql',
-//             host: 'localhost',
-//             port: 3306,
-//             username: 'root',
-//             password: '27052003',
-//             database: 'student',
-//             entities: entities,
-//             synchronize: true,
-//             ...options,
-//           });
-//           await dataSource.initialize();
-
-//           return dataSource;
-//         },
-//       },
-//     ];
-
-//     return {
-//       module: DatabaseModule,
-//       providers: providers,
-//       exports: providers,
-//     };
-//   }
-// }
 // import { Module } from '@nestjs/common';
 // import { TypeOrmModule } from '@nestjs/typeorm';
+// import { User } from 'src/user/entities/user.entity';
+
+// @Module({
+//   imports: [
+//     TypeOrmModule.forRoot({
+//       type: 'mysql',
+//       host: process.env.DB_HOST,
+//       port: +process.env.DB_PORT,
+//       username: process.env.DB_USERNAME,
+//       password: process.env.DB_PASSWORD,
+//       database: process.env.DB_DATABASE,
+
+//       entities: [User],
+//       synchronize: false,
+//     }),
+//   ],
+// })
+// export class DatabaseModule {}

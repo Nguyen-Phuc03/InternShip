@@ -11,13 +11,7 @@ export class CreateUserMongodb1726633993738 implements MigrationInterface {
 
     await collection.insertOne({
       name: 'Phuc',
-      age: 20,
       mail: 'phuc305072@gmail.com',
-    });
-    await collection.insertOne({
-      name: 'Trang',
-      age: 20,
-      mail: 'trang1809@gmail.com',
     });
     await new Promise((resolve) => setTimeout(resolve, 5000));
   }

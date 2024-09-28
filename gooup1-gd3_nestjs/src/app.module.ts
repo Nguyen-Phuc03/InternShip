@@ -22,15 +22,18 @@ import { CacheModule } from '@nestjs/cache-manager';
 // import { MediatorModule } from './mediator/mediator.module';
 import { UploadModule } from './Upload/upload.module';
 import { FileEntity } from './Upload/entities/upload.entity';
+//import { SocketsModule } from './sockets/sockets.module';
+import { SocketModule } from './socket/socket.module';
 @Module({
   imports: [
     CacheModule.register({
       ttl: 30 * 1000,
       isGlobal: true,
+      max: 100,
       //store: redisStore,
     }),
     UserModule,
-    ConfigModule.forRoot({}),
+    ConfigModule.forRoot({ isGlobal: true }),
     //DatabaseModule.forRoot([User]),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -66,6 +69,8 @@ import { FileEntity } from './Upload/entities/upload.entity';
       ],
     }),
     UploadModule,
+    SocketModule,
+    //SocketsModule,
     // MediatorModule,
   ],
   providers: [User1Service, MediatorService],

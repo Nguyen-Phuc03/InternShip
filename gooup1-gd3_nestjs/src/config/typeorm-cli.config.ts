@@ -20,5 +20,5 @@ export default new DataSource({
   database: process.env.DB_DATABASE,
   logging: configService.get<boolean>('DB_LOGGING'),
   entities: [User, FileEntity],
-  migrations: [CreateUser1726630234008, CreateFiles1726720104585],
+  migrations: [CreateUser1726630234008],
 });

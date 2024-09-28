@@ -22,15 +22,15 @@ export class UserController {
   constructor(
     @Inject('USER_SERVICE') private readonly userService: UserService,
   ) {}
-  @Post()
+  @Post('create')
   create(@Body() userDto: UserDto, @CUser() user: UserDto) {
     console.log('User data:', user);
     return this.userService.create(userDto);
   }
-  @Get()
-  findAll() {
-    return this.userService.findAll();
-  }
+  // @Get()
+  // findAll() {
+  //   return this.userService.findAll();
+  // }
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.userService.findOne(+id);

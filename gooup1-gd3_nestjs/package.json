@@ -20,9 +20,10 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
-    "migrate:create": "typeorm migration:create src/migration/Create_files",
-    "migration:run": "npm run typeorm -- --dataSource=src/config/typeorm-cli.config.ts migration:run",
-    "migration:revert": "npm run typeorm -- --dataSource=src/config/typeorm-cli.config.ts migration:revert"
+    "migrate:create": "typeorm migration:create src/migration/Create_User_mongodb",
+    "migration:run": "npm run typeorm -- --dataSource=src/config/typeorm-cli-mongodb.config.ts migration:run",
+    "migration:revert": "npm run typeorm -- --dataSource=src/config/typeorm-cli.config.ts migration:revert",
+    "start:local": "NODE_ENV=local nest start"
   },
   "dependencies": {
     "@nestjs/cache-manager": "^2.2.2",
@@ -51,6 +52,7 @@
     "redis": "^4.7.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
+    "socket.io": "^4.8.0",
     "typeorm": "^0.3.20"
   },
   "devDependencies": {
